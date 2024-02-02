@@ -1,0 +1,85 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&family=Cinzel:wght@400;700&display=swap');
+
+/* Medieval Style CSS */
+body {
+    font-family: 'Cardo', serif; /* Cardo for body text */
+    margin: 0;
+    padding: 0;
+    background-color: #f4e9d8; /* Parchment-like background */
+    color: #3a3a3c; /* Darker text for better contrast */
+}
+
+header, footer {
+    font-family: 'Cinzel', serif; /* Cinzel for a more decorative touch in headers and footers */
+    background-color: #5a3921; /* Dark wood or leather-like color */
+    color: #f4e9d8; /* Parchment-like color for text */
+    text-align: center;
+    padding: 1em;
+    font-size: 24px;
+}
+
+nav {
+    background: #8c6239; /* Lighter brown, reminiscent of old paper or wood */
+    padding: 1em;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul a {
+    color: #f4e9d8;
+    text-decoration: none;
+    padding: 0 15px;
+}
+
+nav ul a:hover {
+    text-decoration: underline;
+}
+
+.content {
+    display: flex;
+    flex-direction: column; /* Adjusting layout for simplicity */
+    align-items: center;
+    padding: 1em;
+}
+
+.main {
+    flex: 1;
+    text-align: center; /* Centering main content */
+}
+
+.sidebar {
+    display: none; /* Hiding sidebar for a simpler layout */
+}
+
+h1, h2, h3 {
+    font-family: 'Cinzel', serif; /* Enhancing headings with Cinzel for a medieval feel */
+}
+
+/* Adding some decorative elements */
+header {
+    border-bottom: 2px solid #8c6239;
+}
+
+footer {
+    border-top: 2px solid #8c6239;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    header, footer {
+        font-size: 20px;
+    }
+}
