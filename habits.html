@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Forge</title>
+    <link rel="stylesheet" href="medieval_style.css">
+</head>
+<body>
+    <header>
+        <h1>Habit Forge</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="habits.html">Your Habits</a></li>
+            <li><a href="analysis.html">Analysis</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="content">
+        <main class="main">
+            <h2>Edit your habits here...</h2>
+            <button id="addFormBtn">Add Habit</button>
+        </main>
+    </div>
+    <!--<footer>
+        <p>Habit Forge &copy; 2024</p>
+    </footer>-->
+    <script>
+        document.getElementById('addFormBtn').addEventListener('click', function() {
+            addForm();
+        });
+
+        let formCounter = 0; // Initialize counter to track forms
+
+        function addForm() {
+            formCounter++; // Increment formCounter for each new form
+            let formContainer = document.getElementById('formContainer');
+            if (!formContainer) {
+                formContainer = document.createElement('div');
+                formContainer.setAttribute('id', 'formContainer');
+                document.body.appendChild(formContainer);
+            }
+            const formId = `formSection-${formCounter}`;
+            const newForm = document.createElement('div');
+            newForm.classList.add('formSection');
+            newForm.setAttribute('id', formId);
+            newForm.innerHTML = `
+                <div>
+                    <label>Habit Description:</label>
+                    <input type="text" name="habitDescription">
+                </div>
+                <div>
+                    <label>Frequency:</label>
+                    <select name="frequency">
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="yearly">Yearly</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Number of times per day/week/month/year:</label>
+                    <input type="text" name="times">
+                </div>
+                <button type="button" onclick="deleteForm('${formId}')">Delete This Habit</button>
+            `;
+            formContainer.appendChild(newForm); // Append the new form to the form container
+        }
+        function deleteForm(formId) {
+            const formToBeRemoved = document.getElementById(formId);
+            if (formToBeRemoved) {
+                formToBeRemoved.parentNode.removeChild(formToBeRemoved);
+            }
+        }
+    </script>                       
+</body>
+</html>
