@@ -76,8 +76,13 @@
         }
         function saveForm(){
             console.log("Saving...");
-            const habit = Object.create(null);
-            habit[description] = "Running";
+
+            const habit = {
+            description: "Drink 8oz of water",
+            frequency: "Daily",
+            times: "6",
+            };
+
             console.log(habit.description);
         }
         function cancelForm(){
