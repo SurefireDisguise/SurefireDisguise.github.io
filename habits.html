@@ -26,6 +26,7 @@
         </main>
     </div>
     <script>
+        let savedHabitsByFormId = {};
         document.getElementById('addFormBtn').addEventListener('click', function(){
             addForm();
         });
@@ -63,8 +64,8 @@
                     <input type="text" name="times">
                 </div>
                 <button type="button" onclick="deleteForm('${formId}')">Delete This Habit</button>
-                <button type="button" onclick="saveForm()">Save Habit</button>
-                <button type="button" onclick="cancelForm()">Cancel Changes</button>
+                <button type="button" onclick="saveForm('${formId}')">Save Habit</button>
+                <button type="button" onclick="cancelForm('${formId}')">Cancel Changes</button>
             `;
             formContainer.appendChild(newForm); // Append the new form to the form container
         }
@@ -74,19 +75,36 @@
                 formToBeRemoved.parentNode.removeChild(formToBeRemoved);
             }
         }
-        function saveForm(){
-            console.log("Saving...");
+        function saveForm(formId){
+            const formElement = document.getElementById(formId);
+            const habitDescription = formElement.querySelector('input[name="habitDescription"]').value;
+            const frequency = formElement.querySelector('select[name="frequency"]').value;
+            const times = formElement.querySelector('input[name="times"]').value;
 
-            const habit = {
-            description: "Drink 8oz of water",
-            frequency: "Daily",
-            times: "6",
+            var habit = {
+                description: habitDescription,
+                frequency: frequency,
+                times: times
             };
 
-            console.log(habit.description);
+            // Store the habit using formId as the key
+            savedHabitsByFormId[formId] = habit;
+            console.log("Saved habit for formId:", formId, habit);
         }
-        function cancelForm(){
-            console.log("Cancelling...");
+        function cancelForm(formId) {
+            const formElement = document.getElementById(formId);
+            if (savedHabitsByFormId.hasOwnProperty(formId)) {
+                // If there is a saved state, populate the form with it
+                const savedHabit = savedHabitsByFormId[formId];
+                formElement.querySelector('input[name="habitDescription"]').value = savedHabit.description;
+                formElement.querySelector('select[name="frequency"]').value = savedHabit.frequency;
+                formElement.querySelector('input[name="times"]').value = savedHabit.times;
+            } else {
+                // If there is no saved state, clear the form
+                formElement.querySelector('input[name="habitDescription"]').value = '';
+                formElement.querySelector('select[name="frequency"]').value = 'daily'; // Assuming 'daily' is the default value
+                formElement.querySelector('input[name="times"]').value = '';
+            }
         }
     </script>                       
 </body>
