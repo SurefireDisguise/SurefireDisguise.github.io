@@ -65,7 +65,6 @@
                 <button type="button" onclick="deleteForm('${formId}')">Delete This Habit</button>
                 <button type="button" onclick="saveForm()">Save Habit</button>
                 <button type="button" onclick="cancelForm()">Cancel Changes</button>
-                <br>
             `;
             formContainer.appendChild(newForm); // Append the new form to the form container
         }
@@ -77,6 +76,9 @@
         }
         function saveForm(){
             console.log("Saving...");
+            const habit = Object.create(null);
+            habit[description] = "Running";
+            console.log(habit.description);
         }
         function cancelForm(){
             console.log("Cancelling...");
