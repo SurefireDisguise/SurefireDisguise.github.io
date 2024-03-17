@@ -25,17 +25,14 @@
             <button id="addFormBtn">Add Habit</button>
         </main>
     </div>
-    <!--<footer>
-        <p>Habit Forge &copy; 2024</p>
-    </footer>-->
     <script>
-        document.getElementById('addFormBtn').addEventListener('click', function() {
+        document.getElementById('addFormBtn').addEventListener('click', function(){
             addForm();
         });
 
         let formCounter = 0; // Initialize counter to track forms
 
-        function addForm() {
+        function addForm(){
             formCounter++; // Increment formCounter for each new form
             let formContainer = document.getElementById('formContainer');
             if (!formContainer) {
@@ -66,14 +63,23 @@
                     <input type="text" name="times">
                 </div>
                 <button type="button" onclick="deleteForm('${formId}')">Delete This Habit</button>
+                <button type="button" onclick="saveForm()">Save Habit</button>
+                <button type="button" onclick="cancelForm()">Cancel Changes</button>
+                <br>
             `;
             formContainer.appendChild(newForm); // Append the new form to the form container
         }
-        function deleteForm(formId) {
+        function deleteForm(formId){
             const formToBeRemoved = document.getElementById(formId);
             if (formToBeRemoved) {
                 formToBeRemoved.parentNode.removeChild(formToBeRemoved);
             }
+        }
+        function saveForm(){
+            console.log("Saving...");
+        }
+        function cancelForm(){
+            console.log("Cancelling...");
         }
     </script>                       
 </body>
