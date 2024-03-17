@@ -3,24 +3,24 @@
 
 /* Medieval Style CSS */
 body {
-    font-family: 'Cardo', serif; /* Cardo for body text */
+    font-family: 'Cardo', serif;
     margin: 0;
     padding: 0;
-    background-color: #f4e9d8; /* Parchment-like background */
-    color: #3a3a3c; /* Darker text for better contrast */
+    background-color: #f4e9d8;
+    color: #3a3a3c;
 }
 
 header, footer {
-    font-family: 'Cinzel', serif; /* Cinzel for a more decorative touch in headers and footers */
-    background-color: #5a3921; /* Dark wood or leather-like color */
-    color: #f4e9d8; /* Parchment-like color for text */
+    font-family: 'Cinzel', serif;
+    background-color: #5a3921;
+    color: #f4e9d8;
     text-align: center;
     padding: 1em;
     font-size: 24px;
 }
 
 nav {
-    background: #8c6239; /* Lighter brown, reminiscent of old paper or wood */
+    background: #8c6239;
     padding: 1em;
 }
 
@@ -44,25 +44,36 @@ nav ul a:hover {
 
 .content {
     display: flex;
-    flex-direction: column; /* Adjusting layout for simplicity */
+    flex-direction: column;
     align-items: center;
-    padding: 1em;
 }
 
 .main {
     flex: 1;
-    text-align: center; /* Centering main content */
+    text-align: center;
 }
 
+.main p {
+    max-width: 600px; /* Control width */
+    margin: 0 auto 20px; /* Center paragraphs and add space below them */
+    text-align: justify; /* Optional: align text */
+    /*line-height: 1.6; /* Improve readability */
+    /*font-size: 18px; /* Adjust size for readability */
+    /*padding: 10px; /* Add some padding around text */
+    /*background-color: #f9f9f9; /* Light background, optional */
+    /*border-left: 3px solid #8c8c8c; /* Medieval manuscript style, optional */
+    /*color: #333; /* Text color for readability */
+}
+
+
 .sidebar {
-    display: none; /* Hiding sidebar for a simpler layout */
+    display: none;
 }
 
 h1, h2, h3 {
-    font-family: 'Cinzel', serif; /* Enhancing headings with Cinzel for a medieval feel */
+    font-family: 'Cinzel', serif;
 }
 
-/* Adding some decorative elements */
 header {
     border-bottom: 2px solid #8c6239;
 }
@@ -91,10 +102,10 @@ footer {
   }
   
   .formSection {
-    width: 100%; /* Adjust the width as needed */
-    max-width: 600px; /* Adjust the max-width as needed for your design */
+    width: 100%;
+    max-width: 600px;
     margin: 20px auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow for better visibility */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     box-sizing: border-box;
   }
