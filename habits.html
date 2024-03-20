@@ -13,7 +13,7 @@
     <nav>
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="habits.html">Your Habits</a></li>
+            <li><a href="habits.html">Managing Habits</a></li>
             <li><a href="analysis.html">Analysis</a></li>
             <li><a href="about.html">About</a></li>
         </ul>
@@ -26,55 +26,59 @@
     </div>
     <script>
         let savedHabitsByFormId = {};
-        document.getElementById('addFormBtn').addEventListener('click', function(){
-            addForm();
+        let formCounter = 0; // Initialize counter to track forms
+
+        // Load saved habits from sessionStorage on page load
+        document.addEventListener('DOMContentLoaded', function(){
+            const savedHabitsJSON = sessionStorage.getItem('savedHabits');
+            if (savedHabitsJSON) {
+                savedHabitsByFormId = JSON.parse(savedHabitsJSON);
+                // Render each saved habit form
+                for (const formId in savedHabitsByFormId) {
+                    addForm(true, formId, savedHabitsByFormId[formId]);
+                }
+            }
         });
 
-        let formCounter = 0; // Initialize counter to track forms
-        //^could be used for future analysis page
+        document.getElementById('addFormBtn').addEventListener('click', function(){
+        addForm(false);
+        });
 
-        function addForm(){
-            formCounter++; // Increment formCounter for each new form
+        function addForm(isSaved, formId = `formSection-${++formCounter}`, habit = {description: '', frequency: 'daily', times: ''}){
             let formContainer = document.getElementById('formContainer');
-            if (!formContainer) {
+            if (!formContainer){
                 formContainer = document.createElement('div');
                 formContainer.setAttribute('id', 'formContainer');
                 document.body.appendChild(formContainer);
             }
-            const formId = `formSection-${formCounter}`;
             const newForm = document.createElement('div');
             newForm.classList.add('formSection');
             newForm.setAttribute('id', formId);
             newForm.innerHTML = `
                 <div>
                     <label>Habit Description:</label>
-                    <input type="text" name="habitDescription">
+                    <input type="text" name="habitDescription" value="${habit.description}">
                 </div>
                 <div>
                     <label>Frequency:</label>
                     <select name="frequency">
-                        <option value="daily">Daily</option>
-                        <option value="weekly">Weekly</option>
-                        <option value="monthly">Monthly</option>
-                        <option value="yearly">Yearly</option>
+                        <option value="daily" ${habit.frequency === 'daily' ? 'selected' : ''}>Daily</option>
+                        <option value="weekly" ${habit.frequency === 'weekly' ? 'selected' : ''}>Weekly</option>
+                        <option value="monthly" ${habit.frequency === 'monthly' ? 'selected' : ''}>Monthly</option>
+                        <option value="yearly" ${habit.frequency === 'yearly' ? 'selected' : ''}>Yearly</option>
                     </select>
                 </div>
                 <div>
                     <label>Number of times per day/week/month/year:</label>
-                    <input type="text" name="times">
+                    <input type="text" name="times" value="${habit.times}">
                 </div>
                 <button type="button" onclick="deleteForm('${formId}')">Delete This Habit</button>
                 <button type="button" onclick="saveForm('${formId}')">Save Habit</button>
                 <button type="button" onclick="cancelForm('${formId}')">Cancel Changes</button>
             `;
-            formContainer.appendChild(newForm); // Append the new form to the form container
+            formContainer.appendChild(newForm);
         }
-        function deleteForm(formId){
-            const formToBeRemoved = document.getElementById(formId);
-            if (formToBeRemoved) {
-                formToBeRemoved.parentNode.removeChild(formToBeRemoved);
-            }
-        }
+
         function saveForm(formId){
             const formElement = document.getElementById(formId);
             const habitDescription = formElement.querySelector('input[name="habitDescription"]').value;
@@ -90,19 +94,34 @@
             // Store the habit using formId as the key
             savedHabitsByFormId[formId] = habit;
             console.log("Saved habit for formId:", formId, habit);
+
+            // Serialize and save to sessionStorage
+            sessionStorage.setItem('savedHabits', JSON.stringify(savedHabitsByFormId));
         }
-        function cancelForm(formId) {
+
+        function deleteForm(formId){
+            const formToBeRemoved = document.getElementById(formId);
+            if (formToBeRemoved){
+                formToBeRemoved.parentNode.removeChild(formToBeRemoved);
+                // Also remove from savedHabitsByFormId and update sessionStorage
+                delete savedHabitsByFormId[formId];
+                sessionStorage.setItem('savedHabits', JSON.stringify(savedHabitsByFormId));
+            }
+        }
+
+        function cancelForm(formId){
             const formElement = document.getElementById(formId);
-            if (savedHabitsByFormId.hasOwnProperty(formId)) {
+            if (savedHabitsByFormId.hasOwnProperty(formId)){
                 // If there is a saved state, populate the form with it
                 const savedHabit = savedHabitsByFormId[formId];
                 formElement.querySelector('input[name="habitDescription"]').value = savedHabit.description;
                 formElement.querySelector('select[name="frequency"]').value = savedHabit.frequency;
                 formElement.querySelector('input[name="times"]').value = savedHabit.times;
-            } else {
+            } 
+            else{
                 // If there is no saved state, clear the form
                 formElement.querySelector('input[name="habitDescription"]').value = '';
-                formElement.querySelector('select[name="frequency"]').value = 'daily'; // Assuming 'daily' is the default value
+                formElement.querySelector('select[name="frequency"]').value = 'daily';
                 formElement.querySelector('input[name="times"]').value = '';
             }
         }
