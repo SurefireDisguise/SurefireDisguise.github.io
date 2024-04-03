@@ -28,9 +28,9 @@
         let savedHabitsByFormId = {};
         let formCounter = 0; // Initialize counter to track forms
 
-        // Load saved habits from sessionStorage on page load
-        document.addEventListener('DOMContentLoaded', function(){
-            const savedHabitsJSON = sessionStorage.getItem('savedHabits');
+        // Load saved habits from localStorage on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedHabitsJSON = localStorage.getItem('savedHabits');
             if (savedHabitsJSON) {
                 savedHabitsByFormId = JSON.parse(savedHabitsJSON);
                 // Render each saved habit form
@@ -95,17 +95,17 @@
             savedHabitsByFormId[formId] = habit;
             console.log("Saved habit for formId:", formId, habit);
 
-            // Serialize and save to sessionStorage
-            sessionStorage.setItem('savedHabits', JSON.stringify(savedHabitsByFormId));
+            // Serialize and save to localStorage
+            localStorage.setItem('savedHabits', JSON.stringify(savedHabitsByFormId));
         }
 
         function deleteForm(formId){
             const formToBeRemoved = document.getElementById(formId);
             if (formToBeRemoved){
                 formToBeRemoved.parentNode.removeChild(formToBeRemoved);
-                // Also remove from savedHabitsByFormId and update sessionStorage
+                // Also remove from savedHabitsByFormId and update localStorage
                 delete savedHabitsByFormId[formId];
-                sessionStorage.setItem('savedHabits', JSON.stringify(savedHabitsByFormId));
+                localStorage.setItem('savedHabits', JSON.stringify(savedHabitsByFormId));
             }
         }
 

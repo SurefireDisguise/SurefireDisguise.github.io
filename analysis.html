@@ -20,9 +20,8 @@
     </nav>
     <div class="content">
         <main class="main">
-            <!-- Habit Tracking Section -->
-            <h3>Track a Habit</h3>
-            <div id="habitTrackingSection" class="form-section">
+            <div class="form-section">
+                <!-- Habit Tracking Section -->
                 Select Habit <select id="habitSelector">
                     <!-- Options will be populated here -->
                 </select>
@@ -34,16 +33,9 @@
                 </label>
                 <button onclick="saveTrackRecord()">Save Record</button>
                 <button onclick="cancelTrackRecord()">Cancel</button>
-            </div>
-            
-
-             <!-- View Habit History Section -->
-            <h3>View Habit History</h3>
-            <div id="habitHistorySection" class="form-section">
-                <select id="habitHistorySelector">
-                    <!-- Options will be populated based on saved habits -->
-                </select>
-                <button onclick="showHistory()">Show History</button>
+                     
+             <!-- Habit History Section -->
+                <h3>Habit History</h3>
                 <div id="habitHistoryDisplay" class="history-content">
                     <!-- History will be displayed here -->
                 </div>
@@ -52,78 +44,90 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const savedHabitsJSON = sessionStorage.getItem('savedHabits');
+            const savedHabitsJSON = localStorage.getItem('savedHabits');
             if (savedHabitsJSON) {
                 const savedHabits = JSON.parse(savedHabitsJSON);
                 populateHabitDropdown('habitSelector', savedHabits);
-                populateHabitDropdown('habitHistorySelector', savedHabits);
             }
         });
+    
         function populateHabitDropdown(selectorId, savedHabits) {
             const selector = document.getElementById(selectorId);
-            Object.keys(savedHabits).forEach((formId) => {
+            // Add default "None" option
+            const defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.textContent = 'None';
+            selector.appendChild(defaultOption);
+    
+            Object.keys(savedHabits).forEach((habitId) => {
                 const habitOption = document.createElement('option');
-                habitOption.value = formId;
-                habitOption.textContent = savedHabits[formId].description;
+                habitOption.value = habitId;
+                habitOption.textContent = savedHabits[habitId].description;
                 selector.appendChild(habitOption);
             });
         }
+    
+        document.getElementById('habitSelector').addEventListener('change', function() {
+            // Now directly using this dropdown to trigger history display
+            const habitId = this.value;
+            if (habitId) {
+                showHistory(habitId);
+            } else {
+                document.getElementById('habitHistoryDisplay').innerHTML = ''; // Clear history display if "None" is selected
+            }
+        });
+
         function saveTrackRecord() {
             const habitId = document.getElementById('habitSelector').value;
             const date = document.getElementById('trackDate').value;
             const time = document.getElementById('trackTime').value;
             const description = document.getElementById('trackDescription').value;
             const goalMet = document.getElementById('goalMet').checked;
-        
+
             const trackingRecord = { 
                 date, 
                 time, 
                 description, 
                 goalMet 
             };
-            
-            let trackingRecords = JSON.parse(sessionStorage.getItem('trackingRecords') || '{}');
+    
+            let trackingRecords = JSON.parse(localStorage.getItem('trackingRecords') || '{}');
             if (!trackingRecords[habitId]) {
                 trackingRecords[habitId] = [];
             }
             trackingRecords[habitId].push(trackingRecord);
-        
-            sessionStorage.setItem('trackingRecords', JSON.stringify(trackingRecords));
+
+            localStorage.setItem('trackingRecords', JSON.stringify(trackingRecords));
             alert('Record saved successfully!');
             cancelTrackRecord(); // Optionally clear the form after saving
+
+            // Automatically update the history display
+            showHistory(habitId);
         }
+
         function cancelTrackRecord() {
             document.getElementById('trackDate').value = '';
             document.getElementById('trackTime').value = '';
             document.getElementById('trackDescription').value = '';
             document.getElementById('goalMet').checked = false;
-        }
-        function showHistory() {
-            const habitId = document.getElementById('habitHistorySelector').value;
-            let trackingRecords = JSON.parse(sessionStorage.getItem('trackingRecords') || '{}');
+        }        
+
+        function showHistory(habitId) {
+            let trackingRecords = JSON.parse(localStorage.getItem('trackingRecords') || '{}');
             const records = trackingRecords[habitId] || [];
             
             records.sort((a, b) => new Date(a.date) - new Date(b.date));
             
-            let displayHtml = '<ul>';
+            let displayHtml = '<ul style="list-style-type: none;">';
             for (const record of records) {
-                displayHtml += `<li>Date: ${record.date}, Time: ${record.time}, Description: ${record.description}, Goal Met: ${record.goalMet ? 'Yes' : 'No'}</li>`;
+                displayHtml += `<li>Date: ${record.date}; Time: ${record.time}; Description: ${record.description}; Goal Met: ${record.goalMet ? 'Yes' : 'No'}</li>`;
             }
             displayHtml += '</ul>';
             
             document.getElementById('habitHistoryDisplay').innerHTML = displayHtml;
         }
-
-
-
-        //move history under the form, but make the history visible once the habit is selected from the dropdown
-        //make the dropdown have a default selection "None"
-        //make the habit history and the tracking part within the same div
-
-        //explore localStorage instead of sessionStorage for persistance
-        //look into files, saving and loading JSON
-
-        
     </script>
+    
+    
 </body>
 </html>
