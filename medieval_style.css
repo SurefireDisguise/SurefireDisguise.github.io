@@ -54,17 +54,10 @@ nav ul a:hover {
 }
 
 .main p {
-    max-width: 600px; /* Control width */
-    margin: 0 auto 20px; /* Center paragraphs and add space below them */
-    text-align: justify; /* Optional: align text */
-    /*line-height: 1.6; /* Improve readability */
-    /*font-size: 18px; /* Adjust size for readability */
-    /*padding: 10px; /* Add some padding around text */
-    /*background-color: #f9f9f9; /* Light background, optional */
-    /*border-left: 3px solid #8c8c8c; /* Medieval manuscript style, optional */
-    /*color: #333; /* Text color for readability */
+    max-width: 600px;
+    margin: 0 auto 20px;
+    text-align: justify;
 }
-
 
 .sidebar {
     display: none;
@@ -109,4 +102,28 @@ footer {
     padding: 20px;
     box-sizing: border-box;
   }
-  
+/*experimenting starts here*/
+
+/* Create a common class for both sections */
+.form-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    box-sizing: border-box;
+}
+#habitHistoryDisplay {
+    width: 100%; /* This will take the width of its parent */
+    max-width: 600px; /* Ensure this matches the width of the tracking section */
+    overflow: auto; /* Add scroll if content is too wide/long */
+}
+.history-content {
+    max-width: 100%; /* Ensure the content does not stretch beyond the container width */
+    overflow: auto; /* Add scrollbars if content is too wide/long */
+}
+
+/*dream weaver, wizziwig : something to create and generate css*/
