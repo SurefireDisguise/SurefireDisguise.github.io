@@ -21,7 +21,7 @@
     <div class="content">
         <main class="main">
             <h2>Edit your habits here...</h2>
-            <button id="addFormBtn">Add Habit</button>
+            <button id="addFormBtn" class="button">Add Habit</button>
         </main>
     </div>
     <script>
@@ -72,9 +72,9 @@
                     <label>Number of times per day/week/month/year:</label>
                     <input type="text" name="times" value="${habit.times}">
                 </div>
-                <button type="button" onclick="deleteForm('${formId}')">Delete This Habit</button>
-                <button type="button" onclick="saveForm('${formId}')">Save Habit</button>
-                <button type="button" onclick="cancelForm('${formId}')">Cancel Changes</button>
+                <button type="button" class="button" onclick="deleteForm('${formId}')">Delete This Habit</button>
+                <button type="button" class="button" onclick="saveForm('${formId}')">Save Habit</button>
+                <button type="button" class="button" onclick="cancelForm('${formId}')">Cancel Changes</button>
             `;
             formContainer.appendChild(newForm);
         }
@@ -125,15 +125,6 @@
                 formElement.querySelector('input[name="times"]').value = '';
             }
         }
-        //work on the analysis page
-        //select from any of your saved habits in habits.html
-        //multiple key-value pairs per habit in a new record: 
-            //date and time(use a calender?),
-            //description field as a text box,
-            //and a checkmark or boolean field for if you satisfied the goal
-
-        //analysis and the tracking page is the same
-        //should show past history and have ability to save, or cancel when you track your habits
     </script>                       
 </body>
 </html>

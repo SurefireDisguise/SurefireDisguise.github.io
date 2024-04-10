@@ -23,5 +23,22 @@
             <h2>See a summary of your habits here</h2>
         </main>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedHabitsJSON = localStorage.getItem('savedHabits');
+            if (savedHabitsJSON) {
+                const savedHabits = JSON.parse(savedHabitsJSON);
+                const habitLinksContainer = document.querySelector('.main');
+                Object.keys(savedHabits).forEach((habitId) => {
+                    const habitLink = document.createElement('a');
+                    habitLink.href = `analysis.html?habitId=${habitId}`;
+                    habitLink.textContent = savedHabits[habitId].description;
+                    habitLink.classList.add('habit-link'); // Add any necessary classes
+                    habitLinksContainer.appendChild(habitLink);
+                    habitLinksContainer.appendChild(document.createElement('br')); // For spacing
+                });
+            }
+        });
+    </script>
 </body>
 </html>

@@ -27,12 +27,12 @@
                 </select>
                 Date <input type="date" id="trackDate">
                 Time <input type="time" id="trackTime">
-                Notes <textarea id="trackDescription"></textarea>
+                Notes <textarea id="trackDescription" style="width: 300px; height: 100px;"></textarea>
                 <label>
                     <input type="checkbox" id="goalMet"> Goal Met
                 </label>
-                <button onclick="saveTrackRecord()">Save Record</button>
-                <button onclick="cancelTrackRecord()">Cancel</button>
+                <button onclick="saveTrackRecord()" class="button">Save Record</button>
+                <button onclick="cancelTrackRecord()" class="button">Cancel</button>
                      
              <!-- Habit History Section -->
                 <h3>Habit History</h3>
@@ -43,6 +43,16 @@
         </main>
     </div>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const habitId = urlParams.get('habitId');
+            if (habitId) {
+                document.getElementById('habitSelector').value = habitId;
+                // Trigger any necessary event listeners, such as showing the history for the selected habit
+                showHistory(habitId);
+            }
+        });
+        
         document.addEventListener('DOMContentLoaded', function() {
             const savedHabitsJSON = localStorage.getItem('savedHabits');
             if (savedHabitsJSON) {

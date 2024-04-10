@@ -7,7 +7,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4e9d8;
-    color: #3a3a3c;
+    color: #5a3e36;
 }
 
 header, footer {
@@ -101,6 +101,8 @@ footer {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     box-sizing: border-box;
+    border-radius: 4px; /* Slightly rounded corners for a softer look */
+
   }
 /*experimenting starts here*/
 
@@ -115,6 +117,7 @@ footer {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     box-sizing: border-box;
+    border-radius: 4px; /* Slightly rounded corners for a softer look */
 }
 #habitHistoryDisplay {
     width: 100%; /* This will take the width of its parent */
@@ -122,8 +125,72 @@ footer {
     overflow: auto; /* Add scroll if content is too wide/long */
 }
 .history-content {
-    max-width: 100%; /* Ensure the content does not stretch beyond the container width */
-    overflow: auto; /* Add scrollbars if content is too wide/long */
+    margin: 0 auto; /* Centers the block element horizontally */
+    text-align: center; /* Centers the text inside the block element */
+    max-width: 600px; /* Set a max-width if desired for better readability */
 }
 
+.history-content ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none; /* Removes the default list styling */
+}
+
+.history-content ul li {
+    margin: 0 auto; /* Center align the list items */
+    display: block; /* Will make it easier to apply margins and centering */
+}
+
+
 /*dream weaver, wizziwig : something to create and generate css*/
+
+.habit-link {
+    display: inline-block;
+    margin: 5px 0; /* Adjust spacing between links */
+    padding: 8px 12px;
+    background-color: #eac28e; /* Parchment-like background */
+    color: #5a3e36; /* Dark brown text color for readability */
+    text-decoration: none; /* Remove underline */
+    font-size: 18px;
+    border: 1px solid #8c7b6b; /* Subtle border */
+    border-radius: 4px; /* Slightly rounded corners */
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+}
+
+.habit-link:hover {
+    background-color: #eac28ebc; /* Lighter background on hover */
+    color: #563927; /* Slightly darker text */
+    text-decoration: underline; /* Add underline on hover for emphasis */
+}
+
+.button {
+    background-color: #eac28e; /* Parchment-like background */
+    color: #5a3e36; /* Dark brown text */
+    border: 1px solid #8c7b6b; /* Solid border that fits the theme */
+    padding: 8px 12px; /* Comfortable padding */
+    text-align: center;
+    text-decoration: none; /* Removing underline from links styled as buttons */
+    display: inline-block;
+    font-family: 'Cardo', serif;
+    font-size: 16px; /* Appropriate text size */
+    margin: 4px 2px; /* Spacing around buttons */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
+    cursor: pointer; /* Cursor indicates clickable items */
+    border-radius: 4px; /* Slightly rounded corners for a softer look */
+}
+
+.button:hover {
+    background-color: #eac28ebc; /* Lighter background on hover for feedback */
+    color: #563927; /* Darken text for contrast */
+}
+
+input[type="text"],
+input[type="time"],
+input[type="date"],
+select,
+input[type="checkbox"],
+textarea {
+    background-color: #f5dfc3; /* Your desired background color */
+    border: 1px solid #8c7b6b;
+    border-radius: 4px;
+}
