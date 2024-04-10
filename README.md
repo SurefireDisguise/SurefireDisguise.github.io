@@ -7,8 +7,8 @@ Additionally, you will need to place the server.js file in the same root as the 
 
 I am running 'nodemon server.js' in the Windows Powershell Administrator terminal.
 Make sure to run the following beforehand to be able to use nodemon,
-'Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
->>'
+'Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process'
+'>>'
 
 Otherwise you can just run
 'node server.js'
