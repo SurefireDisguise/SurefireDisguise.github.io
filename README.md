@@ -2,6 +2,8 @@
 Habit Forge
 
 To impliment JSON reading and writing capabilities, you need to have downloaded Node.js.
+[Currently the server runs fine, but I was not able to finish full file management migration to JSON]
+
 Once that is downloaded, you need to make a directory. Within that directory will be were you place the .html and .css files.
 Additionally, you will need to place the server.js file in the same root as the directory(not within the directory).
 
